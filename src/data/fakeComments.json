@@ -1,0 +1,54 @@
+[
+  {
+    "_id": "1",
+    "content": "This is a great candidate! Definitely voting for them.",
+    "account": {
+      "_id": "acc1",
+      "cin": "12345",
+      "firstName": "John",
+      "lastName": "Doe",
+      "password": "hashed_password",
+      "votedFor": "candidate1",
+      "favorites": ["candidate1", "candidate2"]
+    }
+  },
+  {
+    "_id": "2",
+    "content": "I like their policies, especially the ones about education.",
+    "account": {
+      "_id": "acc2",
+      "cin": "67890",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "password": "hashed_password",
+      "votedFor": "candidate2",
+      "favorites": ["candidate2", "candidate3"]
+    }
+  },
+  {
+    "_id": "3",
+    "content": "Their stance on healthcare is very impressive.",
+    "account": {
+      "_id": "acc3",
+      "cin": "54321",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "password": "hashed_password",
+      "votedFor": "candidate3",
+      "favorites": ["candidate3", "candidate1"]
+    }
+  },
+  {
+    "_id": "4",
+    "content": "I appreciate their focus on environmental issues.",
+    "account": {
+      "_id": "acc4",
+      "cin": "98765",
+      "firstName": "Bob",
+      "lastName": "Brown",
+      "password": "hashed_password",
+      "votedFor": "candidate4",
+      "favorites": ["candidate4", "candidate2"]
+    }
+  }
+]

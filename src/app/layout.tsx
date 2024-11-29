@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "@/components/Header";
+import { Account } from "@/types";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,11 +25,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user: Account | null = {
+    _id: "acc1",
+    cin: "12345",
+    firstName: "John",
+    lastName: "Doe",
+    password: "hashed_password",
+    votedFor: "candidate1",
+    favorites: ["candidate1", "candidate2"],
+  };
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header user={user} />
         {children}
       </body>
     </html>
