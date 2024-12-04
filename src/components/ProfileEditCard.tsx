@@ -2,22 +2,29 @@
 
 import { useState } from "react";
 import { Account } from "@/types";
-
+import { updateAccount } from "@/services/accounts";
+import { useAuth } from "@/context/AuthContext";
+import { toast } from "react-toastify";
 interface ProfileEditProps {
-  user: Account;
+  account: Account;
   setIsEditing: (editing: boolean) => void;
 }
 
-const ProfileEditCard = ({ user, setIsEditing }: ProfileEditProps) => {
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [cin, setCin] = useState(user.cin);
+const ProfileEditCard = ({ account, setIsEditing }: ProfileEditProps) => {
+  const [firstName, setFirstName] = useState(account.firstName);
+  const [lastName, setLastName] = useState(account.lastName);
+  const [cin, setCin] = useState(account.cin);
+  const { refreshAccount } = useAuth();
 
-  const handleSave = () => {
-    // Handle saving updated profile data, e.g., send data to the backend
-    console.log("Updated Info:", { firstName, lastName, cin });
+  const handleSave = async () => {
+    try {
+      await updateAccount(account.cin, { firstName, lastName });
+      toast.success("Profile updated successfully");
+      refreshAccount();
+    } catch (error) {
+      console.error(error);
+    }
 
-    // After saving, exit edit mode
     setIsEditing(false);
   };
 
@@ -65,6 +72,7 @@ const ProfileEditCard = ({ user, setIsEditing }: ProfileEditProps) => {
           CIN
         </label>
         <input
+          disabled
           id="cin"
           type="text"
           value={cin}
@@ -74,7 +82,7 @@ const ProfileEditCard = ({ user, setIsEditing }: ProfileEditProps) => {
         />
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between space-x-4">
         <button
           onClick={() => setIsEditing(false)}
           className="w-full py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"

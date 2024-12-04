@@ -1,26 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Account } from "@/types";
 import ProfileInfo from "@/components/ProfileInfoCard";
 import ProfileEdit from "@/components/ProfileEditCard";
+import { useAuth } from "@/context/AuthContext";
+import { Account } from "@/types";
+import { withAuth } from "../withAuth";
 
 const ProfilePage = () => {
-  // Example data for the logged-in user
-  const user: Account = {
-    _id: "1",
-    cin: "12345678",
-    firstName: "John",
-    lastName: "Doe",
-    password: "password123",
-    votedFor: "Candidate1",
-    favorites: [],
-  };
-
   const [isEditing, setIsEditing] = useState(false);
+  const { account } = useAuth();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           {isEditing ? "Edit Profile" : "Profile"}
@@ -28,13 +20,18 @@ const ProfilePage = () => {
 
         {/* Displaying Profile Info or Edit Form */}
         {isEditing ? (
-          <ProfileEdit user={user} setIsEditing={setIsEditing} />
+          account && (
+            <ProfileEdit account={account} setIsEditing={setIsEditing} />
+          )
         ) : (
-          <ProfileInfo user={user} setIsEditing={setIsEditing} />
+          <ProfileInfo
+            account={account as Account}
+            setIsEditing={setIsEditing}
+          />
         )}
       </div>
     </div>
   );
 };
 
-export default ProfilePage;
+export default withAuth(ProfilePage);
