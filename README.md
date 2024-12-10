@@ -157,7 +157,7 @@
 ### **8. Future Enhancements**
 
 - Implement real-time voting updates using **WebSockets**.
-- Add support for multi-language localization (e.g., English, French, Arabic).
+- Add support for multi-language localization (e.g., English, Arabic).
 - Introduce advanced analytics and visualizations for election results using charting libraries (e.g., Chart.js, D3.js).
 - Extend the platform to manage legislative or regional elections.
 - Improve server performance using caching mechanisms like **Redis**.
